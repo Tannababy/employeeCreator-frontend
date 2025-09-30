@@ -1,39 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Employee App</title>
-  <link rel="stylesheet" href="/src/style.css" />
-</head>
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">EmployeeApp</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#">View Employees</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" id="addEmployeeLink">Add Employee</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Delete Employee</a></li>
-        </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee App</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <div class="container">
+        <!-- <a class="navbar-brand" href="#">EmployeeApp</a> -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">View All Employees</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="#" id="addEmployeeLink">Add Employee</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="#">Delete Employee</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container text-center">
-      <h1>Employee Management</h1>
-      <button class="btn btn-primary btn-create" id="createEmployeeBtn">Create New Employee</button>
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container text-center">
+        <h1>Employee Management</h1>
+        <button class="btn btn-primary btn-create" id="createEmployeeBtn">
+          Create New Employee
+        </button>
+      </div>
+    </section>
 
+    <!-- Employee Form -->
+    <section class="container my-5" id="employeeFormSection">
+      <h2>Add New Employee</h2>
+      <form>
+        <div class="mb-3">
+          <label for="employeeFirstName" class="form-label">Firstname</label>
+          <input
+            type="text"
+            class="form-control"
+            id="employeeFirstName"
+            name="employeeFirstName"
+            required
+          />
+        </div>
 
+        <div class="mb-3">
+          <label for="employeeLastName" class="form-label">Lastname</label>
+          <input
+            type="text"
+            class="form-control"
+            id="employeeLastName"
+            name="employeeLastName"
+            required
+          />
+        </div>
 
-  <script type="module" src="/src/main.ts"></script>
-</body>
+        <div class="mb-3">
+          <label for="employeeEmail" class="form-label">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="employeeEmail"
+            name="employeeEmail"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="employeeMobile" class="form-label">Mobile</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="employeeMobile"
+            name="employeeMobile"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="employeeAddress" class="form-label">Address</label>
+          <input
+            type="text"
+            class="form-control"
+            id="employeeAddress"
+            name="employeeAddress"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="employeeDept" class="form-label">Department</label>
+          <select
+            class="form-select"
+            id="employeeDept"
+            name="employeeDept"
+            required
+          >
+            <option selected>Select one from the dropdown menu</option>
+            <option value="Engineering">Engineering</option>
+            <option value="HR">HR</option>
+            <option value="IT">IT</option>
+            <option value="Marketing">Marketing</option>
+          </select>
+        </div>
+
+        <section id="contract-info">
+          <h4>Contract info</h4>
+
+          <div class="mb-3">
+            <label for="startDate" class="form-label">Start date</label>
+            <input type="date" id="startDate" name="startDate" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Contract Type</label>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                id="permanent"
+                name="contractType"
+                value="Permanent"
+                required
+              />
+              <label class="form-check-label" for="permanent">Permanent</label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                id="contract"
+                name="contractType"
+                value="Contract"
+              />
+              <label class="form-check-label" for="contract">Contract</label>
+            </div>
+          </div>
+        </section>
+
+        <button type="submit" class="btn btn-primary" id="formSubmit">
+          Submit
+        </button>
+      </form>
+    </section>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

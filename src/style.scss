@@ -5,15 +5,22 @@ $primary: navy;
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 body {
-
   .hero {
     background: #f8f9fa;
+    height: 50vh;
     padding: 60px 0;
 
     h1 {
-      color:$primary;
+      color: $primary;
       font-size: 3rem;
       margin: 5% auto;
     }
+  }
+
+  #employeeFormSection {
+
+    display: none;
+    color: $primary;
+    width: 40vw;
   }
 }
