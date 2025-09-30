@@ -6,21 +6,25 @@ $primary: navy;
 
 body {
   .hero {
-    background: #f8f9fa;
+    background: #92b5d9;
     height: 50vh;
     padding: 60px 0;
 
     h1 {
       color: $primary;
       font-size: 3rem;
-      margin: 5% auto;
+      margin: 10% auto;
     }
   }
 
   #employeeFormSection {
-
     display: none;
     color: $primary;
-    width: 40vw;
+    width: 50vw;
+    border: $primary solid 2px;
+    border-radius: 4px;
+    padding: 20px;
+    background: #92b5d9;
+;
   }
 }
