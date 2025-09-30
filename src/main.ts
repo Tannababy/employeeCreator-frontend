@@ -4,13 +4,16 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./style.scss";
 import type { EmployeeData } from "./employeeType";
 
-const form = document.getElementById("employeeFormSection") as HTMLFormElement;
+const formSection = document.getElementById(
+  "employeeFormSection"
+) as HTMLElement;
+const form = document.getElementById("employeeForm") as HTMLFormElement;
 const createEmployeeBtn = document.getElementById(
   "createEmployeeBtn"
 ) as HTMLButtonElement;
 
 const displayForm = () => {
-  form.style.display = "block";
+  formSection.style.display = "block";
 };
 
 const getFormData = (form: HTMLFormElement): EmployeeData => {
@@ -67,4 +70,4 @@ const submitFormData = async (event: Event) => {
 };
 
 createEmployeeBtn.addEventListener("click", displayForm);
-form.addEventListener("click", submitFormData);
+form.addEventListener("submit", submitFormData);

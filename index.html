@@ -48,7 +48,7 @@
     <!-- Employee Form -->
     <section class="container my-5" id="employeeFormSection">
       <h2>Add New Employee</h2>
-      <form>
+      <form id="employeeForm">
         <div class="mb-3">
           <label for="employeeFirstName" class="form-label">Firstname</label>
           <input
@@ -112,7 +112,9 @@
             name="employeeDept"
             required
           >
-            <option selected>Select one from the dropdown menu</option>
+            <option value="" selected disabled>
+              Select one from the dropdown menu
+            </option>
             <option value="Engineering">Engineering</option>
             <option value="HR">HR</option>
             <option value="IT">IT</option>
