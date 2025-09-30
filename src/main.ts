@@ -28,6 +28,43 @@ const getFormData = (form: HTMLFormElement): EmployeeData => {
   };
 };
 
+const submitFormData = async (event: Event) => {
+  event.preventDefault();
+
+  try {
+    const data = getFormData(form);
+
+    const response = await fetch(`http://localhost:8080/api/employees`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      //POST request - the body must be a JSON string not an object in fetch
+      body: JSON.stringify(data),
+    });
+
+    // checks status of request and return json reponse if ok
+    if (!response.ok) {
+      throw new Error(`Server at error: ${response.status}`);
+    }
+    const result = await response.json();
+    console.log("Employee created:", result);
+
+    return result;
+  } catch (err) {
+    console.error(`Error submitting form: ${err}`);
+    return {
+      firstName: "",
+      lastName: "",
+      email: "",
+      mobile: "",
+      address: "",
+      department: "Error",
+      startDate: "",
+      contractType: "",
+    };
+  }
+};
 
 createEmployeeBtn.addEventListener("click", displayForm);
-
+form.addEventListener("click", submitFormData);
