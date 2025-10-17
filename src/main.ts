@@ -11,6 +11,12 @@ const form = document.getElementById("employeeForm") as HTMLFormElement;
 const createEmployeeBtn = document.getElementById(
   "createEmployeeBtn"
 ) as HTMLButtonElement;
+const employeeTableBody = document.getElementById(
+  "employeeTable"
+) as HTMLTableElement;
+const viewAllEmployees = document.getElementById(
+  "viewAllEmployees"
+) as HTMLAnchorElement;
 
 const displayForm = () => {
   formSection.style.display = "block";
@@ -67,6 +73,19 @@ const submitFormData = async (event: Event) => {
       contractType: "",
     };
   }
+};
+
+const getAllEmployees = async (event: Event) => {
+  event.preventDefault();
+
+  const reponse = await fetch("http://localhost:8080/api/employees", {
+    method: "GET",
+  });
+
+  const result = await reponse.json();
+  console.log("Employees found:", result);
+
+  return result;
 };
 
 createEmployeeBtn.addEventListener("click", displayForm);

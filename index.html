@@ -22,13 +22,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">View All Employees</a>
+              <a class="nav-link" href="employeeTable" id="viewAllEmployees">View All Employees </a>
             </li>
             <!-- <li class="nav-item">
               <a class="nav-link" href="#" id="addEmployeeLink">Add Employee</a>
             </li> -->
             <li class="nav-item">
-              <a class="nav-link" href="#">Delete Employee</a>
+              <a class="nav-link" href="#" id="deleteEmployee">Delete Employee</a>
             </li>
           </ul>
         </div>
@@ -160,6 +160,30 @@
           Submit
         </button>
       </form>
+    </section>
+
+    <!-- List of employees Section -->
+    <section class="container my-5" id="employeeTableSection">
+      <table class="table table-hover" id="employeeTable">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Department</th>
+          </tr>
+        </thead>
+        <tbody id="employeeTableBody">
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+        
+        </tbody>
+      </table>
     </section>
 
     <script type="module" src="/src/main.ts"></script>
