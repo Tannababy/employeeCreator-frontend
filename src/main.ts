@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import "./style.scss";
-import type { EmployeeData } from "./employeeType";
 
 const formSection = document.getElementById(
   "employeeFormSection"
@@ -14,21 +13,23 @@ const createEmployeeBtn = document.getElementById(
 const viewAllEmployees = document.getElementById(
   "viewAllEmployees"
 ) as HTMLAnchorElement;
-const employeeTable = document.getElementById(
+const employeeTableSection = document.getElementById(
   "employeeTableSection"
 ) as HTMLElement;
-
+const employeeTable = document.getElementById(
+  "employeeTable"
+) as HTMLTableElement;
 
 const displayForm = () => {
   formSection.style.display = "block";
 };
 
 const displayEmployees = () => {
-    console.log("Displaying employee table");
-    employeeTable.style.display = "block";
+  console.log("Displaying employee table");
+  employeeTableSection.style.display = "block";
 };
 
-const getFormData = (form: HTMLFormElement): EmployeeData => {
+const getFormData = (form: HTMLFormElement) => {
   const formInfo = new FormData(form);
 
   return {
@@ -54,11 +55,11 @@ const submitFormData = async (event: Event) => {
       headers: {
         "Content-Type": "application/json",
       },
-      //POST request - the body must be a JSON string not an object in fetch
+      //converts data object to a JSON string
       body: JSON.stringify(data),
     });
 
-    // checks status of request and return json reponse if ok
+    // checks status of request and returns json reponse if ok
     if (!response.ok) {
       throw new Error(`Server at error: ${response.status}`);
     }
@@ -88,12 +89,25 @@ const getAllEmployees = async (event: Event) => {
     method: "GET",
   });
 
-  const result = await reponse.json();
-  console.log("Employees found:", result);
+  const employeesList = await reponse.json();
+  console.log("Employees found:", employeesList);
 
-  return result;
+  // Loop through each employee and create a table row
+  employeesList.forEach((emp: any) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${emp.id}</td>
+        <td>${emp.firstName}</td>
+        <td>${emp.lastName}</td>
+        <td>${emp.email}</td>
+        <td>${emp.department}</td>
+      `;
+    employeeTable.appendChild(row);
+  });
+    
+    displayEmployees();
 };
 
 createEmployeeBtn.addEventListener("click", displayForm);
 form.addEventListener("submit", submitFormData);
-viewAllEmployees.addEventListener("click", displayEmployees);
+viewAllEmployees.addEventListener("click", getAllEmployees);
