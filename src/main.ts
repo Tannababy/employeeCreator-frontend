@@ -11,15 +11,21 @@ const form = document.getElementById("employeeForm") as HTMLFormElement;
 const createEmployeeBtn = document.getElementById(
   "createEmployeeBtn"
 ) as HTMLButtonElement;
-const employeeTableBody = document.getElementById(
-  "employeeTable"
-) as HTMLTableElement;
 const viewAllEmployees = document.getElementById(
   "viewAllEmployees"
 ) as HTMLAnchorElement;
+const employeeTable = document.getElementById(
+  "employeeTableSection"
+) as HTMLElement;
+
 
 const displayForm = () => {
   formSection.style.display = "block";
+};
+
+const displayEmployees = () => {
+    console.log("Displaying employee table");
+    employeeTable.style.display = "block";
 };
 
 const getFormData = (form: HTMLFormElement): EmployeeData => {
@@ -90,3 +96,4 @@ const getAllEmployees = async (event: Event) => {
 
 createEmployeeBtn.addEventListener("click", displayForm);
 form.addEventListener("submit", submitFormData);
+viewAllEmployees.addEventListener("click", displayEmployees);
