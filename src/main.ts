@@ -1,15 +1,23 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
+import Modal from "bootstrap/js/dist/modal";
 import "./style.scss";
+import type { Employee } from "./types/employeeType";
 
+// Selected DOM elements
 const formSection = document.getElementById(
   "employeeFormSection"
 ) as HTMLElement;
 const form = document.getElementById("employeeForm") as HTMLFormElement;
+const formSubmitBtn = document.getElementById(
+  "formSubmit"
+) as HTMLButtonElement;
 const createEmployeeBtn = document.getElementById(
   "createEmployeeBtn"
 ) as HTMLButtonElement;
+const successModalElement = document.getElementById(
+  "successModal"
+) as HTMLElement;
 const viewAllEmployees = document.getElementById(
   "viewAllEmployees"
 ) as HTMLAnchorElement;
@@ -25,8 +33,12 @@ const displayForm = () => {
 };
 
 const displayEmployees = () => {
-  console.log("Displaying employee table");
   employeeTableSection.style.display = "block";
+};
+
+const displaySubmitModal = () => {
+  const successModal = new Modal(successModalElement);
+  successModal.show();
 };
 
 const getFormData = (form: HTMLFormElement) => {
@@ -47,6 +59,8 @@ const getFormData = (form: HTMLFormElement) => {
 const submitFormData = async (event: Event) => {
   event.preventDefault();
 
+  formSubmitBtn.disabled = true;
+
   try {
     const data = getFormData(form);
 
@@ -63,22 +77,12 @@ const submitFormData = async (event: Event) => {
     if (!response.ok) {
       throw new Error(`Server at error: ${response.status}`);
     }
-    const result = await response.json();
-    console.log("Employee created:", result);
 
-    return result;
+    displaySubmitModal();
+    form.reset();
   } catch (err) {
     console.error(`Error submitting form: ${err}`);
-    return {
-      firstName: "",
-      lastName: "",
-      email: "",
-      mobile: "",
-      address: "",
-      department: "Error",
-      startDate: "",
-      contractType: "",
-    };
+    formSubmitBtn.disabled = false;
   }
 };
 
@@ -90,10 +94,10 @@ const getAllEmployees = async (event: Event) => {
   });
 
   const employeesList = await reponse.json();
-  console.log("Employees found:", employeesList);
+  console.log("Employees found:");
 
   // Loop through each employee and create a table row
-  employeesList.forEach((emp: any) => {
+  employeesList.forEach((emp: Employee) => {
     const row = document.createElement("tr");
     row.innerHTML = `
         <td>${emp.id}</td>
@@ -104,10 +108,14 @@ const getAllEmployees = async (event: Event) => {
       `;
     employeeTable.appendChild(row);
   });
-    
-    displayEmployees();
+
+  displayEmployees();
 };
 
+// Event Listeners
 createEmployeeBtn.addEventListener("click", displayForm);
 form.addEventListener("submit", submitFormData);
 viewAllEmployees.addEventListener("click", getAllEmployees);
+successModalElement.addEventListener("hidden.bs.modal", () => {
+  formSection.style.display = "none";
+});
