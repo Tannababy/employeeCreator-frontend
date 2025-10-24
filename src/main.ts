@@ -42,8 +42,11 @@ const displayForm = () => {
   formSection.style.display = "block";
 };
 
+let isTableShown = true;
+
 const displayEmployees = () => {
   employeeTableSection.style.display = "block";
+  isTableShown;
 };
 
 const displaySubmitModal = () => {
@@ -92,6 +95,10 @@ const submitFormData = async (event: Event) => {
 
     // checks status of request and returns json reponse if ok
     if (!response.ok) {
+      alert(
+        "❌ Employee email has been used, use another email to register employee."
+      );
+      form.reset();
       throw new Error(`Server at error: ${response.status}`);
     }
 
@@ -117,7 +124,7 @@ const getAllEmployees = async (event: Event) => {
   employeesList.forEach((emp: Employee) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-        <td>${emp.id}</td>
+         <td class="fw-semibold table-hover">${emp.id}</td>
         <td>${emp.firstName}</td>
         <td>${emp.lastName}</td>
         <td>${emp.email}</td>

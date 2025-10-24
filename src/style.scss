@@ -5,6 +5,7 @@ $primary: navy;
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 body {
+    font-family: 'Courier New', Courier, monospace;
   .hero {
     background: #92b5d9;
     height: 50vh;
@@ -29,5 +30,7 @@ body {
 
   #employeeTableSection {
     display: none;
+    text-align: center;
+    font-size: 20px;
   }
 }
