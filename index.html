@@ -203,9 +203,7 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
-            Employee has been successfully added.
-          </div>
+          <div class="modal-body">Employee has been successfully added.</div>
           <div class="modal-footer">
             <button
               type="button"
@@ -213,6 +211,54 @@
               data-bs-dismiss="modal"
             >
               OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Input Modal -->
+    <div
+      class="modal fade"
+      id="deleteModal"
+      tabindex="-1"
+      aria-labelledby="deleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="deleteModalLabel">
+              Please enter the ID number of the employee to be deleted.
+            </h1>
+          </div>
+          <div class="modal-body">
+            <div class="input-group mb-3">
+              <input
+                type="number"
+                class="form-control"
+                id="idInput"
+                aria-label="Employee ID number"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="confirmDelete"
+              data-bs-dismiss="modal"
+            >
+              Confirm
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="cancelDelete"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              Cancel
             </button>
           </div>
         </div>

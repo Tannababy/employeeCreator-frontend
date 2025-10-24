@@ -21,6 +21,16 @@ const successModalElement = document.getElementById(
 const viewAllEmployees = document.getElementById(
   "viewAllEmployees"
 ) as HTMLAnchorElement;
+const deleteEmployee = document.getElementById(
+  "deleteEmployee"
+) as HTMLAnchorElement;
+const deleteModalElement = document.getElementById(
+  "deleteModal"
+) as HTMLElement;
+const confirmDelete = document.getElementById(
+  "confirmDelete"
+) as HTMLButtonElement;
+const employeeID = document.getElementById("idInput") as HTMLInputElement;
 const employeeTableSection = document.getElementById(
   "employeeTableSection"
 ) as HTMLElement;
@@ -39,6 +49,13 @@ const displayEmployees = () => {
 const displaySubmitModal = () => {
   const successModal = new Modal(successModalElement);
   successModal.show();
+};
+
+const displaydeleteModal = () => {
+  const deleteModal = new Modal(deleteModalElement);
+  deleteModal.show();
+
+  removeEmployee();
 };
 
 const getFormData = (form: HTMLFormElement) => {
@@ -112,10 +129,39 @@ const getAllEmployees = async (event: Event) => {
   displayEmployees();
 };
 
+const removeEmployee = async () => {
+  const empID = employeeID.value;
+
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/employees/${empID}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (!response.ok) {
+      alert(`❌ Employee ID ${empID} not found!`);
+      employeeID.value = "";
+      return;
+    }
+
+    alert(`✅ Employee ID ${empID} deleted successfully!`);
+
+    const modalInstance = Modal.getInstance(deleteModalElement);
+    modalInstance?.hide();
+    employeeID.value = "";
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
 // Event Listeners
 createEmployeeBtn.addEventListener("click", displayForm);
 form.addEventListener("submit", submitFormData);
 viewAllEmployees.addEventListener("click", getAllEmployees);
+deleteEmployee.addEventListener("click", displaydeleteModal);
+confirmDelete.addEventListener("click", removeEmployee);
 successModalElement.addEventListener("hidden.bs.modal", () => {
   formSection.style.display = "none";
 });
